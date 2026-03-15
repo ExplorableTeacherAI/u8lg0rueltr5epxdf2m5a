@@ -1,12 +1,12 @@
 /**
  * Variables Configuration
  * =======================
- * 
+ *
  * CENTRAL PLACE TO DEFINE ALL SHARED VARIABLES
- * 
+ *
  * This file defines all variables that can be shared across sections.
  * AI agents should read this file to understand what variables are available.
- * 
+ *
  * USAGE:
  * 1. Define variables here with their default values and metadata
  * 2. Use them in any section with: const x = useVar('variableName', defaultValue)
@@ -53,108 +53,119 @@ export interface VariableDefinition {
 
 /**
  * =====================================================
- * 🎯 DEFINE YOUR VARIABLES HERE
+ * 🎯 TOPOLOGY LESSON VARIABLES
  * =====================================================
- * 
- * SUPPORTED TYPES:
- * 
- * 1. NUMBER (slider):
- *    { defaultValue: 5, type: 'number', min: 0, max: 10, step: 1 }
- * 
- * 2. TEXT (free text):
- *    { defaultValue: 'Hello', type: 'text', placeholder: 'Enter text...' }
- * 
- * 3. SELECT (dropdown):
- *    { defaultValue: 'sine', type: 'select', options: ['sine', 'cosine', 'tangent'] }
- * 
- * 4. BOOLEAN (toggle):
- *    { defaultValue: true, type: 'boolean' }
- * 
- * 5. ARRAY (list of numbers):
- *    { defaultValue: [1, 2, 3], type: 'array' }
- * 
- * 6. OBJECT (complex data):
- *    { defaultValue: { x: 5, y: 10 }, type: 'object', schema: '{ x: number, y: number }' }
  */
 export const variableDefinitions: Record<string, VariableDefinition> = {
-    // ========================================
-    // ADD YOUR VARIABLES HERE
-    // ========================================
-
-    // Uncomment and modify these examples for your lesson:
-
-    /*
     // ─────────────────────────────────────────
-    // NUMBER - Use with sliders
+    // SHAPE TRANSFORMATION CONTROLS
     // ─────────────────────────────────────────
-    myValue: {
-        defaultValue: 5,
+    stretchAmount: {
+        defaultValue: 1,
         type: 'number',
-        label: 'My Value',
-        description: 'A number that controls something',
-        unit: 'm',           // optional unit display
-        min: 0,
-        max: 10,
-        step: 0.5,
+        label: 'Stretch Amount',
+        description: 'How much the play-dough is stretched',
+        min: 0.5,
+        max: 2,
+        step: 0.1,
+        color: '#62D0AD',
     },
 
-    // ─────────────────────────────────────────
-    // TEXT - Free text input
-    // ─────────────────────────────────────────
-    lessonTitle: {
-        defaultValue: 'My Lesson',
-        type: 'text',
-        label: 'Lesson Title',
-        description: 'The title of your lesson',
-        placeholder: 'Enter a title...',
+    squishAmount: {
+        defaultValue: 1,
+        type: 'number',
+        label: 'Squish Amount',
+        description: 'How much the play-dough is squished',
+        min: 0.5,
+        max: 2,
+        step: 0.1,
+        color: '#8E90F5',
     },
 
-    // ─────────────────────────────────────────
-    // SELECT - Dropdown with options
-    // ─────────────────────────────────────────
-    difficulty: {
-        defaultValue: 'medium',
+    currentShape: {
+        defaultValue: 'ball',
         type: 'select',
-        label: 'Difficulty',
-        description: 'The difficulty level of the lesson',
-        options: ['easy', 'medium', 'hard', 'expert'],
+        label: 'Current Shape',
+        description: 'The current shape of the play-dough',
+        options: ['ball', 'snake', 'pancake', 'star'],
+        color: '#F7B23B',
     },
 
     // ─────────────────────────────────────────
-    // BOOLEAN - Toggle switch
+    // SHAPE CATEGORIES FOR SORTING
     // ─────────────────────────────────────────
-    showHints: {
-        defaultValue: true,
-        type: 'boolean',
-        label: 'Show Hints',
-        description: 'Toggle to show or hide hints',
+    shapeCategory: {
+        defaultValue: 'no-hole',
+        type: 'select',
+        label: 'Shape Category',
+        description: 'Whether the shape has holes or not',
+        options: ['no-hole', 'one-hole'],
+        color: '#AC8BF9',
     },
 
     // ─────────────────────────────────────────
-    // ARRAY - List of numbers
+    // ASSESSMENT QUESTIONS
     // ─────────────────────────────────────────
-    dataPoints: {
-        defaultValue: [1, 4, 9, 16, 25],
-        type: 'array',
-        label: 'Data Points',
-        description: 'Y-values for plotting a graph',
+    answerBallToSnake: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Ball to Snake Answer',
+        description: 'Can a ball become a snake?',
+        placeholder: '???',
+        correctAnswer: 'yes',
+        color: '#62D0AD',
+        caseSensitive: false,
+    },
+
+    answerBallToDonut: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Ball to Donut Answer',
+        description: 'Can a ball become a donut without poking a hole?',
+        placeholder: '???',
+        correctAnswer: 'no',
+        color: '#F4A89A',
+        caseSensitive: false,
+    },
+
+    answerWhyNotDonut: {
+        defaultValue: '',
+        type: 'select',
+        label: 'Why Not Donut Answer',
+        description: 'Why cannot a ball become a donut?',
+        placeholder: '???',
+        correctAnswer: 'hole',
+        options: ['hole', 'color', 'size'],
+        color: '#8E90F5',
+    },
+
+    answerSameFamily: {
+        defaultValue: '',
+        type: 'select',
+        label: 'Same Family Answer',
+        description: 'Which shapes are in the same family?',
+        placeholder: '???',
+        correctAnswer: 'ball-egg',
+        options: ['ball-egg', 'ball-donut', 'donut-egg'],
+        color: '#F8A0CD',
     },
 
     // ─────────────────────────────────────────
-    // OBJECT - Complex structured data
+    // VISUAL TASK STATUS
     // ─────────────────────────────────────────
-    graphSettings: {
-        defaultValue: { 
-            xMin: -10, 
-            xMax: 10, 
-            showGrid: true 
-        },
-        type: 'object',
-        label: 'Graph Settings',
-        description: 'Configuration for the graph display',
-        schema: '{ xMin: number, xMax: number, showGrid: boolean }',
+    dragTaskStatus: {
+        defaultValue: 'pending',
+        type: 'text',
+        label: 'Drag Task Status',
+        description: 'Status of the shape dragging task',
     },
-    */
+
+    sortingTaskStatus: {
+        defaultValue: 'pending',
+        type: 'text',
+        label: 'Sorting Task Status',
+        description: 'Status of the sorting game task',
+    },
 };
 
 /**
